@@ -1,11 +1,19 @@
-const Schema = [`
+import { makeExecutableSchema, addMockFunctionsToSchema, } from 'graphql-tools';
+import mocks from './mocks';
+
+const typeDefs = `
   type Message {
-    message: String
+    id: ID!
+    content: String
   }
-
-  schema {
-    query: Message
+  type Query {
+    messages: [Message]
   }
-`];
-
-export default Schema;
+`;
+const schema = makeExecutableSchema({ typeDefs });
+addMockFunctionsToSchema({ 
+  schema, 
+  mocks, 
+  preserveResolvers: true,
+});
+export { schema };

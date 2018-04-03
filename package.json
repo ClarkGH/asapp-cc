@@ -1,6 +1,6 @@
 {
   "name": "asapp-cc",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Side by side chat pane application",
   "main": "app.js",
   "scripts": {
