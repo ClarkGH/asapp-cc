@@ -10,14 +10,17 @@
   "author": "clarkgh <demolisho@hotmail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "graphql": "^0.13.2",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
+    "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "webpack": "^4.4.1"
+    "webpack": "^3.11.0"
   },
   "engines": {
     "node": "8.7.0"
