@@ -4,7 +4,7 @@
   "description": "Side by side chat pane application",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server/app.js"
+    "start": "nodemon --watch server --watch package.json server/app.js --exec babel-node --presets es2015,react"
   },
   "repository": "https://github.com/ClarkGH/asapp-cc.git",
   "author": "clarkgh <demolisho@hotmail.com>",
