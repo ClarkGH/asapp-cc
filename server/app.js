@@ -1,35 +1,41 @@
-const express = require('express'),
-  app = express(),
-  path = require('path'),
-  express_graphql = require('express-graphql'),
-  { buildSchema } = require('graphql');
+import express from 'express';
+import path from 'path';
+import bodyParser from 'body-parser';
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+import { createServer } from 'http';
 
-// the schema
-let schema = buildSchema(`
-  type Query {
-    message: String
-  }
-`);
+// GraphQL Schema/Mocks
+import Schema from './data/schema';
+import Mocks from './data/mocks';
 
-// the resolver for root
-let root = {
-  message: () => 'Hi mom!'
-}
+// Server routing
+const app = express();
 
 app.set('port', process.env.PORT || 8080);
 
 app.use(express.static('./dist/'));
 
-app.use('/graphql', express_graphql({
-  schema: schema,
-  rootValue: root,
-  graphiql: true,
+// DB setup
+const chatSchema = makeExecutableSchema({
+  typeDefs: Schema,
+});
+
+addMockFunctionsToSchema({
+  schema: chatSchema,
+  mocks: Mocks,
+  preserveResolvers: true,
+});
+
+app.use('/graphql', bodyParser.json(), graphqlExpress({
+  schema: chatSchema,
+  context: {},
 }));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
-});
+app.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql',
+}));  
 
-let server = app.listen(app.get('port'), function () {
-  console.log('Node server listening on port ' + server.address().port);
-});
+const graphQLServer = createServer(app);
+
+graphQLServer.listen(app.get('port'), () => console.log(`Application is now running on http://localhost:${app.get('port')}`));
