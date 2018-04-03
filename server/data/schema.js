@@ -1,6 +1,5 @@
 import { makeExecutableSchema, addMockFunctionsToSchema, } from 'graphql-tools';
-import mocks from './mocks';
-
+import resolvers from './resolvers';
 const typeDefs = `
   type Message {
     id: ID!
@@ -10,10 +9,5 @@ const typeDefs = `
     messages: [Message]
   }
 `;
-const schema = makeExecutableSchema({ typeDefs });
-addMockFunctionsToSchema({ 
-  schema, 
-  mocks, 
-  preserveResolvers: true,
-});
-export { schema };
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+export default schema;

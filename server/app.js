@@ -5,7 +5,7 @@ import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import { createServer } from 'http';
 
 // GraphQL Schema
-import { schema } from './data/schema';
+import schema from './data/schema';
 
 // Server routing
 const app = express();
