@@ -23011,33 +23011,17 @@ var _Chat2 = _interopRequireDefault(_Chat);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import gql from 'graphql-tag';
-
 var client = new _apolloBoost2.default();
 
-// client
-//   .query({
-//     query: gql`
-//       {
-//         messages {
-//           id
-//           content
-//         }
-//       }
-//     `,
-//   })
-//   .then(data => console.log({ data }));
-
 function App() {
-  console.log(client);
   return _react2.default.createElement(
     _reactApollo.ApolloProvider,
     { client: client },
     _react2.default.createElement(
       'div',
       { className: 'App' },
-      _react2.default.createElement(_Chat2.default, { className: 'left-pane', user: 'batman' }),
-      _react2.default.createElement(_Chat2.default, { className: 'right-pane', user: 'joker' })
+      _react2.default.createElement(_Chat2.default, { className: 'left-pane', userId: 1 }),
+      _react2.default.createElement(_Chat2.default, { className: 'right-pane', userId: 3 })
     )
   );
 }
@@ -33502,9 +33486,8 @@ var Chat = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, props));
 
-    _this.textInput = _react2.default.createRef();
     _this.state = {
-      message: 'hi'
+      message: ''
     };
     _this.submitMessage = _this.submitMessage.bind(_this);
     return _this;
@@ -33521,6 +33504,7 @@ var Chat = function (_Component) {
     value: function render() {
       var _this2 = this;
 
+      console.log(this.props);
       return _react2.default.createElement(
         'div',
         null,
@@ -33530,8 +33514,7 @@ var Chat = function (_Component) {
               return _this2.submitMessage(e);
             } },
           _react2.default.createElement('input', {
-            type: 'text',
-            ref: this.textInput
+            type: 'text'
           }),
           _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
         )

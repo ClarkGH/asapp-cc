@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class Chat extends Component {
   constructor(props) {
     super(props);
-    this.textInput = React.createRef();
     this.state = {
       message: '',
     };
@@ -21,7 +20,6 @@ class Chat extends Component {
         <form className="input" onSubmit={e => this.submitMessage(e)}>
           <input
             type="text"
-            ref={this.textInput}
           />
           <input type="submit" value="Submit" />
         </form>
