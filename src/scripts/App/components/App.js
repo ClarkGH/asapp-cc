@@ -1,27 +1,17 @@
 import React from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import gql from 'graphql-tag';
+import Chat from './Chat';
 
 const client = new ApolloClient();
-
-client
-  .query({
-    query: gql`
-      {
-        messages {
-          id
-          content
-        }
-      }
-    `,
-  })
-  .then(data => console.log({ data }));
 
 function App() {
   return (
     <ApolloProvider client={client} >
-      <h1>Hello, Friend!</h1>
+      <div className="App">
+        <Chat className="left-pane" userId={1} chat={1} />
+        <Chat className="right-pane" userId={3} chat={2} />
+      </div>
     </ApolloProvider>
   );
 }
